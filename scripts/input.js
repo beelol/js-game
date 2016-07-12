@@ -23,11 +23,11 @@ Input.keyStates = {
 }
 
 Input.keyDownHandler = function(e) {
-  Input.keyStates[e.keyCode] = true
+  Input.keyStates[e.keyCode] = true;
 }
 
 Input.keyUpHandler = function (e) {
-  Input.keyStates[e.keyCode] = false
+  Input.keyStates[e.keyCode] = false;
 }
 
 Input.receiveMoveInput = function() {
@@ -55,9 +55,5 @@ Input.getKey = function(key) {
     return Input.axes[key];
   }
 }
-
-document.addEventListener("keydown", Input.keyDownHandler, false);
-
-document.addEventListener("keyup", Input.keyUpHandler, false);
 
 module.exports = Input;

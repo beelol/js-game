@@ -1,8 +1,8 @@
 {
-  "name": "Capstone",
+  "name": "Shmup",
   "version": "1.0.0",
   "description": "== README",
-  "main": "index.js",
+  "main": "index.html",
   "directories": {
     "test": "test"
   },

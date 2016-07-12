@@ -1,1 +1,3 @@
-console.log("hello world");
+const Input = require('./input.js');
+
+console.log(Input.receiveMoveInput);

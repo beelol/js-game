@@ -1,0 +1,9 @@
+body {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+}
+
+canvas {
+  margin: auto;
+}

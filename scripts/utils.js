@@ -1,9 +1,21 @@
-Function.prototype.inherits = function (superclass) {
-  function Surrogate(){};
+// Function.prototype.inherits = function (superclass) {
+//   function Surrogate(){};
+//
+//   Surrogate.prototype = superclass.prototype;
+//
+//   this.prototype = new Surrogate();
+//
+//   this.prototype.constructor = this;
+// };
 
-  Surrogate.prototype = superclass.prototype;
+module.exports = {
+  inherits (subClass, superClass) {
+    function Surrogate(){}
 
-  this.prototype = new Surrogate();
+    Surrogate.prototype = superclass.prototype;
 
-  this.prototype.constructor = this;
+    subClass.prototype = new Surrogate();
+
+    subClass.prototype.constructor = subClass;
+  }
 };

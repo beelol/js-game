@@ -7,14 +7,9 @@ const Actor = require('./actor.js');
 
 // Grabs a reference to the canvas
 function GameView(canvas) {
-  this.findCanvas();
-}
-
-// Finds and stores a canvas on the webpage
-GameView.prototype.findCanvas = function() {
-  this.canvas = document.getElementById('canvas');
+  this.canvas = canvas;
   this.ctx = canvas.getContext("2d");
-};
+}
 
 // Draws the game every animation frame
 GameView.prototype.render = function() {
@@ -30,7 +25,7 @@ GameView.prototype.start = function () {
 // Draws every actor in the game
 GameView.prototype.draw = function () {
   this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  Actor.all.forEach((actor) => { actor.draw(this.ctx); });
+  Actor.all.forEach((actor) => { actor.render(this.ctx); });
 };
 
 module.exports = GameView;

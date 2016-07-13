@@ -2,6 +2,7 @@
 const $ = require('jquery');
 const Input = require('./input');
 const Game = require('./game');
+const GameView = require('./game_view');
 
 // Properties for the canvas
 const Screen = require('./utils/screen');
@@ -23,5 +24,10 @@ $('document').ready(function () {
   window.canvas.setAttribute("width", `${Screen.WIDTH}`);
 
   window.actor = new Actor(new Vector(0, 0), 1, Color.red);
-  console.log(actor.transform);
+
+  window.actor.spawn();
+
+  window.gv = new GameView(window.canvas);
+
+  window.gv.start();
 });

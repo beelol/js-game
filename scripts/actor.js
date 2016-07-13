@@ -2,6 +2,7 @@ const Rect = require('./utils/rect');
 const Collider = require('./components/collider.js');
 const Transform = require('./components/transform.js');
 const Renderer = require('./components/renderer.js');
+const Vector = require('./utils/vector');
 
 function Actor(pos, team, color) {
   this.team = team;
@@ -45,14 +46,14 @@ Actor.prototype.addComponent = function(componentType) {
   component.actor = this;
   component.initialize();
 
-  this.components[componentType] = new componentType();
+  this.components[componentType] = component;
 };
 
-Actor.prototype.render = function() {
+Actor.prototype.render = function(ctx) {
   let renderer = this.getComponent(Renderer);
 
   if (renderer) {
-    this.getComponent(Renderer).render();
+    this.getComponent(Renderer).render(ctx);
   }
 };
 
@@ -69,21 +70,31 @@ Actor.prototype.isColliding = function(actor) {
 };
 
 Actor.prototype.tick = function () {
-  console.log("tickin");
+  // console.log("tickin");
 };
 
 Actor.prototype.outOfBounds = function () {
   return this.rect.top > canvas.height;
 };
 
-Actor.spawn = function(left, top, actor) {
-  actor.transform.position = new Vector(left, top);
-
+Actor.prototype.spawn = function () {
   Actor.all.push(actor);
 
-  // This should be moved to the gameloop with some offset so that
-  // it is more easily controlled. However, it is fine to have it here as well.
-  setInterval(actor.tick.bind(actor), 10);
+  this.tickInterval = setInterval(actor.tick.bind(actor), 10);
 };
+
+Actor.prototype.destroy = function () {
+  clearInterval(this.tickInterval);
+};
+
+// Actor.spawn = function(left, top, actor) {
+//   actor.transform.position = new Vector(left, top);
+//
+//   Actor.all.push(actor);
+//
+//   // This should be moved to the gameloop with some offset so that
+//   // it is more easily controlled. However, it is fine to have it here as well.
+//   setInterval(actor.tick.bind(actor), 10);
+// };
 
 module.exports = Actor;

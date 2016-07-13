@@ -1,6 +1,7 @@
 const Transform = require('./transform');
 const Rect = require('../utils/rect');
 
+
 function Collider () {
   this.rect = new Rect(0, 0, 0, 0);
 }

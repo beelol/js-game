@@ -12,7 +12,7 @@ Rect.prototype.isColliding = function (rect2) {
  this.height + this.top > rect2.top;
 };
 
-Rect.prototype.draw = function(color) {
+Rect.prototype.draw = function(color, ctx) {
   ctx.beginPath();
   ctx.rect(this.left, this.top, this.width, this.height);
   ctx.fillStyle = color;

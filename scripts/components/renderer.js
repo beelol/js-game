@@ -21,8 +21,6 @@ Renderer.prototype.render = function(ctx) {
   this.rect.width = this.width;
   this.rect.height = this.height;
 
-  // console.log(this.rect);
-
   this.rect.draw(this.color, ctx);
 };
 

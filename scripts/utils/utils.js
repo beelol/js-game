@@ -12,10 +12,12 @@ module.exports = {
   inherits (subClass, superClass) {
     function Surrogate(){}
 
-    Surrogate.prototype = superclass.prototype;
+    Surrogate.prototype = superClass.prototype;
 
     subClass.prototype = new Surrogate();
 
     subClass.prototype.constructor = subClass;
+
+    subClass.super = superClass;
   }
 };

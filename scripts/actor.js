@@ -1,5 +1,7 @@
 const Rect = require('./utils/rect');
 const Collider = require('./components/collider.js');
+const Controller = require('./components/controller.js');
+const PlayerController = require('./components/player_controller.js');
 const Transform = require('./components/transform.js');
 const Renderer = require('./components/renderer.js');
 const Vector = require('./utils/vector');
@@ -38,7 +40,24 @@ function Actor(pos, team, color) {
 Actor.all = [];
 
 Actor.prototype.getComponent = function(componentType) {
-  return this.components[componentType];
+  if (this.components[componentType]){
+    return this.components[componentType];
+  } else {
+    // This entire else is supposed to do some weird temporary
+    // type checking. We need to do this to check if something inherits
+    // from something else temporarily.
+
+    let componentClasses = Object.keys(this.components);
+
+    let target;
+    componentClasses.forEach((compClass) => {
+      if (this.components[compClass].constructor.super === componentType) {
+        target = this.components[compClass];
+      }
+    });
+
+    return target;
+  }
 };
 
 Actor.prototype.addComponent = function(componentType) {
@@ -70,7 +89,9 @@ Actor.prototype.isColliding = function(actor) {
 };
 
 Actor.prototype.tick = function () {
-  // console.log("tickin");
+  if (this.getComponent(Controller)) {
+    this.getComponent(Controller).move();
+  }
 };
 
 Actor.prototype.outOfBounds = function () {
@@ -78,23 +99,13 @@ Actor.prototype.outOfBounds = function () {
 };
 
 Actor.prototype.spawn = function () {
-  Actor.all.push(actor);
+  Actor.all.push(this);
 
-  this.tickInterval = setInterval(actor.tick.bind(actor), 10);
+  this.tickInterval = setInterval(this.tick.bind(this), 10);
 };
 
 Actor.prototype.destroy = function () {
   clearInterval(this.tickInterval);
 };
-
-// Actor.spawn = function(left, top, actor) {
-//   actor.transform.position = new Vector(left, top);
-//
-//   Actor.all.push(actor);
-//
-//   // This should be moved to the gameloop with some offset so that
-//   // it is more easily controlled. However, it is fine to have it here as well.
-//   setInterval(actor.tick.bind(actor), 10);
-// };
 
 module.exports = Actor;

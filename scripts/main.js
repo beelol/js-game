@@ -11,6 +11,8 @@ const Vector = require('./utils/vector');
 
 // Actor Stuff
 const Actor = require('./actor');
+const PlayerController = require('./components/player_controller');
+const Controller = require('./components/controller');
 // const Transform = require('./components/transform');
 // const Collider = require('./components/collider');
 
@@ -23,9 +25,11 @@ $('document').ready(function () {
   window.canvas.setAttribute("height", `${Screen.HEIGHT}`);
   window.canvas.setAttribute("width", `${Screen.WIDTH}`);
 
-  window.actor = new Actor(new Vector(0, 0), 1, Color.red);
+  window.player = new Actor(new Vector(0, 0), 1, Color.red);
 
-  window.actor.spawn();
+  window.player.addComponent(PlayerController);
+
+  window.player.spawn();
 
   window.gv = new GameView(window.canvas);
 

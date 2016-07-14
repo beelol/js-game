@@ -17,10 +17,12 @@ function Input() {}
 Input.keys = {};
 
 Input.keyDownHandler = function(e) {
+  // e.preventDefault();
   Input.keys[e.keyCode] = 1;
 };
 
 Input.keyUpHandler = function (e) {
+  // e.preventDefault();
   Input.keys[e.keyCode] = 0;
 };
 

@@ -1,14 +1,17 @@
+const Utils = require('../utils/utils');
+
 const Rect = require("../utils/rect");
 const Color = require("../utils/color");
 const Vector = require('../utils/vector');
 const Controller = require('./controller');
-const Utils = require('../utils/utils');
 const Input = require('../input');
 
 const BUTTONS = {
   "left": 37,
   "right": 39
 };
+
+const speed = 20;
 
 function PlayerController () {
   this.rect = new Rect(0, 0, 0, 0);
@@ -18,7 +21,7 @@ function PlayerController () {
 Utils.inherits(PlayerController, Controller);
 
 PlayerController.prototype.initialize = function () {
-
+  // console.log(this.actor);
 };
 
 PlayerController.prototype.getMoveInput = function() {
@@ -26,7 +29,7 @@ PlayerController.prototype.getMoveInput = function() {
 
   if (left) {
     if (left > 0) {
-      return new Vector(-Input.getKey(BUTTONS["left"]), 0);
+      return new Vector(-Input.getKey(BUTTONS["left"]) * speed, 0);
     }
   }
 
@@ -34,7 +37,7 @@ PlayerController.prototype.getMoveInput = function() {
 
   if (right) {
     if (right > 0) {
-      return new Vector(Input.getKey(BUTTONS["right"]), 0);
+      return new Vector(Input.getKey(BUTTONS["right"]) * speed, 0);
     }
   }
 

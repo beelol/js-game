@@ -1,8 +1,14 @@
+// Component inheritance requirements
+const Component = require('./component');
+const Utils = require('../utils/utils');
+
 const Vector = require("../utils/vector");
 
 function Transform () {
   this.position = new Vector(0, 0);
 }
+
+Utils.inherits(Transform, Component);
 
 Transform.prototype.initialize = function () {
   console.log("Transform initialized!");

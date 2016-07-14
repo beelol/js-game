@@ -34,4 +34,8 @@ $('document').ready(function () {
   window.gv = new GameView(window.canvas);
 
   window.gv.start();
+
+  window.testVector = new Vector(Screen.WIDTH/2 - window.player.col.width/2, Screen.HEIGHT - window.player.col.height - 10);
+
+  window.player.transform.setPosition(testVector.toWorldPos())
 });

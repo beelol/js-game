@@ -19,4 +19,9 @@ Transform.prototype.translate = function (vector) {
   this.position.y += vector.y;
 };
 
+Transform.prototype.setPosition = function (vector) {
+  this.position.x = vector.x;
+  this.position.y = vector.y;
+};
+
 module.exports = Transform;

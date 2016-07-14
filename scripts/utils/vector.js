@@ -29,6 +29,13 @@ Vector.prototype.toScreenPos = function() {
   return new Vector(screenX, screenY);
 };
 
+Vector.prototype.toWorldPos = function() {
+  let worldX = this.x - Screen.WIDTH/2;
+  let worldY = Screen.HEIGHT/2 - this.y;
+
+  return new Vector(worldX, worldY);
+};
+
 Vector.prototype.toString = function () {
   return `(${this.x}, ${this.y})`;
 };

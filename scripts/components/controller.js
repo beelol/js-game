@@ -17,7 +17,6 @@ function Controller () {
 Utils.inherits(Controller, Component);
 
 Controller.prototype.initialize = function () {
-  console.log(this.actor);
 };
 
 Controller.prototype.getMoveInput = function() {

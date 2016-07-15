@@ -97,13 +97,13 @@ Actor.prototype.tick = function () {
 
 Actor.prototype.spawn = function () {
   Actor.all.push(this);
-  console.log(Actor.all);
 
   this.tickInterval = setInterval(this.tick.bind(this), 10);
 };
 
 Actor.prototype.destroy = function () {
   clearInterval(this.tickInterval);
+  delete Actor.all[this];
 };
 
 module.exports = Actor;

@@ -5,6 +5,8 @@ const Utils = require('../utils/utils');
 const Transform = require('./transform');
 const Rect = require('../utils/rect');
 
+const Screen = require('../utils/screen');
+
 
 function Collider () {
   this.rect = new Rect(0, 0, 0, 0);

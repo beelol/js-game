@@ -21,7 +21,6 @@ function PlayerController () {
 Utils.inherits(PlayerController, Controller);
 
 PlayerController.prototype.initialize = function () {
-  // console.log(this.actor);
 };
 
 PlayerController.prototype.getMoveInput = function() {

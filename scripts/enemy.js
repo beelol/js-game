@@ -4,23 +4,17 @@ const Screen = require('./utils/screen');
 const Actor = require('./actor');
 const Rect = require('./utils/rect');
 
+const Color = require('./utils/color');
+
+const KamikazeController = require('./components/kamikaze_controller');
 const Transform = require('./components/transform.js');
 const Renderer = require('./components/renderer.js');
+const Collider = require('./components/collider.js');
+
 const Vector = require('./utils/vector');
 
 function Enemy(pos, team, color) {
   Actor.call(this, pos, team, color);
-  //
-  // let left = Math.random() * (Screen.WIDTH) - 50;
-  // let top = -50;
-  //
-  // let rect = new Rect(left, top, 50, 50);
-  //
-  // console.log(new Vector(left, top).toWorldPos());
-  //
-  // this.transform.setPosition(new Vector(left, top).toWorldPos());
-  //
-  // console.log(this.transform.position);
 }
 
 Enemy.all = [];
@@ -39,16 +33,23 @@ Enemy.prototype.isColliding = function(actor) {
   return false;
 };
 
-// Enemy.prototype.tick = function () {
-//   if (this.getComponent(Controller)) {
-//     this.getComponent(Controller).move();
-//   }
-// };
+Enemy.prototype.tick = function() {
+  Enemy.super.prototype.tick.call(this);
 
-// Enemy.prototype.spawn = function () {
-//   Enemy.all.push(this);
-//
-//   this.tickInterval = setInterval(this.tick.bind(this), 10);
-// };
+  if (this.getComponent(Collider)) {
+    if (this.getComponent(Collider).outOfBounds()) {
+      this.destroy();
+    }
+  }
+};
+
+Enemy.spawnRandomEnemy = function () {
+  let enemyVector = new Vector(Math.random() * (Screen.WIDTH - 50), 10).toWorldPos();
+
+  let enemy = new Enemy(enemyVector, 2, Color.red);
+  enemy.addComponent(KamikazeController);
+
+  enemy.spawn();
+};
 
 module.exports = Enemy;

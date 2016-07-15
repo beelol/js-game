@@ -18,7 +18,7 @@ Utils.inherits(KamikazeController, Controller);
 KamikazeController.prototype.initialize = function () {
 };
 
-KamikazeController.prototype.isValidInput = function(input) {
+KamikazeController.prototype.isValidInput = function (input) {
   return true;
 };
 

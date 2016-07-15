@@ -48,6 +48,7 @@ Bullet.prototype.tick = function() {
 
   Actor.all.forEach((actor) => {
     if (actor.isColliding(this)) {
+      console.log("wooooooooooooo");
       if (actor.team !== this.team) {
         actor.destroy();
         this.destroy();

@@ -41,7 +41,5 @@ $('document').ready(function () {
 
   window.player.transform.setPosition(testVector.toWorldPos());
 
-  
-
   Game.start();
 });

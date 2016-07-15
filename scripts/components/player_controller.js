@@ -32,8 +32,6 @@ PlayerController.prototype.fire = function () {
 
   let b = new Bullet(position, this.team, Color.white, new Vector(0, 1));
 
-  console.log(b);
-
   b.spawn();
 };
 

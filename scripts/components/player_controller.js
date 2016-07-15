@@ -1,5 +1,7 @@
 const Utils = require('../utils/utils');
 
+const Bullet = require('../bullet');
+
 const Rect = require("../utils/rect");
 const Color = require("../utils/color");
 const Vector = require('../utils/vector');
@@ -8,7 +10,8 @@ const Input = require('../input');
 
 const BUTTONS = {
   "left": 37,
-  "right": 39
+  "right": 39,
+  "space": 32
 };
 
 const speed = 20;
@@ -21,6 +24,17 @@ function PlayerController () {
 Utils.inherits(PlayerController, Controller);
 
 PlayerController.prototype.initialize = function () {
+  Input.addKeyDownListener(BUTTONS["space"], this.fire.bind(this))
+};
+
+PlayerController.prototype.fire = function () {
+  let position = new Vector(this.actor.transform.position.x, this.actor.transform.position.y + 10);
+
+  let b = new Bullet(position, this.team, Color.white, new Vector(0, 1));
+
+  console.log(b);
+
+  b.spawn();
 };
 
 PlayerController.prototype.getMoveInput = function() {

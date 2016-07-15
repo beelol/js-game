@@ -27,20 +27,21 @@ $('document').ready(function () {
   window.canvas.setAttribute("height", `${Screen.HEIGHT}`);
   window.canvas.setAttribute("width", `${Screen.WIDTH}`);
 
-  // window.player = new Actor(new Vector(0, 0), 1, Color.blue);
-  //
-  // window.player.addComponent(PlayerController);
-  //
-  // window.player.spawn();
+  window.player = new Actor(new Vector(0, 0), 1, Color.blue);
+
+  window.player.addComponent(PlayerController);
+
+  window.player.spawn();
 
   window.gv = new GameView(window.canvas);
 
   window.gv.start();
 
-  // window.testVector = new Vector(Screen.WIDTH/2 - window.player.col.width/2, Screen.HEIGHT - window.player.col.height - 10);
-  //
-  // window.player.transform.setPosition(testVector.toWorldPos());
+  window.testVector = new Vector(Screen.WIDTH/2 - window.player.col.width/2, Screen.HEIGHT - window.player.col.height - 10);
 
-  // Enemy.spawnRandomEnemy();
+  window.player.transform.setPosition(testVector.toWorldPos());
+
+  
+
   Game.start();
 });

@@ -13,11 +13,11 @@ Input.keyDownHandler = function(e) {
   // e.preventDefault();
   Input.keys[e.keyCode] = 1;
 
-  let keys = Object.keys(Input.keyDownListeners);
-
-  keys.forEach((key) => {
-    Input.keyDownListeners[key]();
-  });
+  if (Input.keyDownListeners[e.keyCode]) {
+    Input.keyDownListeners[e.keyCode].forEach((listener) => {
+      listener();
+    });
+  }
 };
 
 // Sets a key's value to be inactive and calls all keyup listeners

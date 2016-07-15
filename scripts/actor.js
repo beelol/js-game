@@ -1,7 +1,6 @@
 const Rect = require('./utils/rect');
 const Collider = require('./components/collider.js');
 const Controller = require('./components/controller.js');
-const PlayerController = require('./components/player_controller.js');
 const Transform = require('./components/transform.js');
 const Renderer = require('./components/renderer.js');
 const Vector = require('./utils/vector');
@@ -103,7 +102,10 @@ Actor.prototype.spawn = function () {
 
 Actor.prototype.destroy = function () {
   clearInterval(this.tickInterval);
-  delete Actor.all[this];
+
+  let index = Actor.all.indexOf(this);
+
+  delete Actor.all[index];
 };
 
 module.exports = Actor;

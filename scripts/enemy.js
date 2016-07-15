@@ -47,6 +47,15 @@ Enemy.spawnRandomEnemy = function () {
   let enemyVector = new Vector(Math.random() * (Screen.WIDTH - 50), 10).toWorldPos();
 
   let enemy = new Enemy(enemyVector, 2, Color.red);
+
+  let size = Math.random() * 15 + 30;
+
+  enemy.renderer.width = size;
+  enemy.renderer.height = size;
+
+  enemy.col.width = size;
+  enemy.col.height = size;
+
   enemy.addComponent(KamikazeController);
 
   enemy.spawn();

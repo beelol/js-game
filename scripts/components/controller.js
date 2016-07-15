@@ -24,38 +24,22 @@ Controller.prototype.getMoveInput = function() {
   return new Vector(0, 0);
 };
 
-Controller.prototype.rectOutOfBounds = function (rect) {
-  // Usually you pass a new position to the rect with
-  // some determined height and width of an actor
-  // Then, if the new position is out of bounds, you can avoid
-  // a new movement that would have happened with the added input.
+Controller.prototype.isValidInput = function(input) {
+  return !this.inputOutOfBounds(input);
+};
 
-  let rectBorderRight = rect.left + rect.width;
-  let rectBorderLeft = rect.left - rect.width;
+Controller.prototype.inputOutOfBounds = function (input) {
+  let actorScreenPos = this.actor.transform.position.toScreenPos();
 
-  let rectBorderTop = rect.top + rect.height;
-  let rectBorderBottom = rect.top - rect.height;
+  let rect = new Rect(actorScreenPos.x + input.x, actorScreenPos.y + input.y, this.actor.col.width, this.actor.col.height);
 
-  let outOfBoundsLeft = (rectBorderLeft < 0);
-  let outOfBoundsRight = (rectBorderRight > Screen.WIDTH);
-  let outOfBoundsTop = (rectBorderTop > Screen.HEIGHT);
-  let outOfBoundsBottom = (rectBorderBottom < 0);
-
-  return (outOfBoundsLeft ||
-          outOfBoundsTop ||
-          outOfBoundsRight ||
-          outOfBoundsBottom);
+  return Screen.rectOutOfBounds(rect);
 };
 
 Controller.prototype.move = function () {
   let input = this.getMoveInput();
 
-  let actorScreenPos = this.actor.transform.position.toScreenPos();
-
-  let rect = new Rect(actorScreenPos.x + input.x, actorScreenPos.y + input.y, this.actor.col.width, this.actor.col.height);
-
-  if (this.rectOutOfBounds(rect))
-      return;
+  if (!this.isValidInput(input)) return;
 
   this.actor.transform.translate(input);
 };

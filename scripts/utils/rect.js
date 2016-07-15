@@ -15,7 +15,7 @@ Rect.prototype.isColliding = function (rect2) {
 Rect.prototype.draw = function(color, ctx) {
   ctx.beginPath();
   ctx.rect(this.left, this.top, this.width, this.height);
-  ctx.fillStyle = color;
+  ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
   ctx.fill();
   ctx.closePath();
 };

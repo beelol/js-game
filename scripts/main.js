@@ -11,7 +11,9 @@ const Vector = require('./utils/vector');
 
 // Actor Stuff
 const Actor = require('./actor');
+const Enemy = require('./enemy');
 const PlayerController = require('./components/player_controller');
+const KamikazeController = require('./components/kamikaze_controller');
 const Controller = require('./components/controller');
 // const Transform = require('./components/transform');
 // const Collider = require('./components/collider');
@@ -25,7 +27,7 @@ $('document').ready(function () {
   window.canvas.setAttribute("height", `${Screen.HEIGHT}`);
   window.canvas.setAttribute("width", `${Screen.WIDTH}`);
 
-  window.player = new Actor(new Vector(0, 0), 1, Color.red);
+  window.player = new Actor(new Vector(0, 0), 1, Color.blue);
 
   window.player.addComponent(PlayerController);
 
@@ -37,5 +39,13 @@ $('document').ready(function () {
 
   window.testVector = new Vector(Screen.WIDTH/2 - window.player.col.width/2, Screen.HEIGHT - window.player.col.height - 10);
 
-  window.player.transform.setPosition(testVector.toWorldPos())
+  window.player.transform.setPosition(testVector.toWorldPos());
+
+  let enemyVector = new Vector(Screen.WIDTH/2, Screen.HEIGHT/2).toWorldPos();
+
+  console.log(enemyVector);
+
+  window.enemy = new Enemy(enemyVector, 2, Color.red);
+  window.enemy.addComponent(KamikazeController);
+  window.enemy.spawn();
 });

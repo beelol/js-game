@@ -10,6 +10,8 @@ function Vector(x, y) {
   this.y = y;
 }
 
+Vector.zero = new Vector(0, 0);
+
 Vector.DIRS = [
   new Vector(1,1),
   new Vector(0,0),

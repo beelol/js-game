@@ -33,6 +33,7 @@ function Actor(pos, team, color) {
   this.col.height = rect.height;
 
   this.renderer = this.getComponent(Renderer);
+  this.renderer.color = color;
   this.renderer.width = rect.width;
   this.renderer.height = rect.height;
 }
@@ -94,12 +95,9 @@ Actor.prototype.tick = function () {
   }
 };
 
-Actor.prototype.outOfBounds = function () {
-  return this.rect.top > canvas.height;
-};
-
 Actor.prototype.spawn = function () {
   Actor.all.push(this);
+  console.log(Actor.all);
 
   this.tickInterval = setInterval(this.tick.bind(this), 10);
 };

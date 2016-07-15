@@ -11,7 +11,7 @@ function Transform () {
 Utils.inherits(Transform, Component);
 
 Transform.prototype.initialize = function () {
-  console.log("Transform initialized!");
+
 };
 
 Transform.prototype.translate = function (vector) {

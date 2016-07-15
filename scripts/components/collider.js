@@ -17,6 +17,14 @@ Collider.prototype.initialize = function () {
   this.rect.top = this.actor.transform.position.y;
 };
 
+Collider.prototype.outOfBounds = function () {
+  let actorScreenPos = this.actor.transform.position.toScreenPos();
+
+  let rect = new Rect(actorScreenPos.x, actorScreenPos.y, this.actor.col.width, this.actor.col.height);
+
+  return Screen.rectOutOfBounds(rect);
+};
+
 Collider.prototype.isColliding = function(collider) {
   this.rect.left = this.actor.transform.position.x;
   this.rect.top = this.actor.transform.position.y;
